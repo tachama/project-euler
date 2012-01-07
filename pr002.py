@@ -28,17 +28,9 @@ def fibonnaci(num):
         fib.append(val)
     return fib
 
-def sum_evened(lst):
-    '''add list that value is even'''
-    sum = 0
-    for l in lst:
-        if l % 2 == 0:
-            sum += l
-    return sum
-
 def main():
     '''main function'''
-    print sum_evened(fibonnaci(MAXNUM))
+    print sum(filter((lambda x: x % 2 == 0), fibonnaci(MAXNUM)))
 
 if __name__ == '__main__':
     main()
