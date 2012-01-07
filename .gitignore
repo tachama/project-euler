@@ -1,0 +1,12 @@
+# .gitignore
+#   ignore files for git.
+
+# ignore python or haskell compiled files
+*.pyc
+*.hi
+*.o
+a.out
+
+# ignore private file (answer and access memo)
+LOCAL.txt
+
