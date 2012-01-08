@@ -12,4 +12,3 @@ clean:
 exec:
 	@echo "add exec-permission to scripts"
 	chmod +x *.py
-
