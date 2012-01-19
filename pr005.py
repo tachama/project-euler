@@ -11,27 +11,30 @@ What is the smallest positive number that is evenly divisible by all of
 the numbers from 1 to 20?
 '''
 
-NUM = 20
+INPUT_NUM = 20
 
 def mult(lst):
-    '''list multi'''
-    m = 1
-    for l in lst:
-        m *= l
-    return m
+  '''list multi'''
+  m = 1
+  for l in lst:
+    m *= l
+  return m
 
 def rests(num):
-    rs = []
-    for i in range(1, num + 1):
-        val = i
-        for r in rs:
-            if val % r == 0:
-                val /= r
-        rs.append(val)
-    return rs
+  '''rests...'''
+  rs = []
+  for i in range(1, num + 1):
+    val = i
+    for r in rs:
+      if val % r == 0:
+        val /= r
+    rs.append(val)
+  return rs
 
-def main():
-    print mult(rests(NUM))
+
+def main(num):
+  '''main function'''
+  print mult(rests(num))
 
 if __name__ == '__main__':
-    main()
+  main(INPUT_NUM)

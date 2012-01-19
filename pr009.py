@@ -13,6 +13,8 @@ There exists exactly one Pythagorean triplet for which a + b + c = 1000.
 Find the product abc.
 '''
 
+INPUT_NUM = 1000
+
 def triplet(b, c):
   '''
   whether check a, b, c is pythagorean triplet?
@@ -26,10 +28,11 @@ def triplet(b, c):
   '''
   return ((1000 - b - c) ** 2 == (c + b) * (c - b)) and 1000 - b - c < b
 
-def main():
-  (b, c) = [(b, c) for b in range(1,500)
-                   for c in range(b+1,1000) if triplet(b, c)][0]
+def main(num):
+  '''main function'''
+  (b, c) = [(b, c) for b in range(1, num / 2)
+                   for c in range(b+1, num) if triplet(b, c)][0]
   print (1000 - b - c) * b * c
 
 if __name__ == '__main__':
-  main()
+  main(INPUT_NUM)

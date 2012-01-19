@@ -16,24 +16,25 @@ Find the difference between the sum of the squares of the first one hundred
 natural numbers and the square of the sum.
 '''
 
-NUM = 100
+INPUT_NUM = 100
 
 def sum_of_sqr(num):
-    '''sum of squrares of 1 to num'''
-    sum = 0
-    for i in range(1, num+1):
-        sum += i ** 2
-    return sum
+  '''sum of squrares of 1 to num'''
+  sums = 0
+  for i in range(1, num + 1):
+    sums += i ** 2
+  return sums
 
 def sqr_of_sum(num):
-    '''squrare of sum of 1 to num'''
-    sum = 0
-    for i in range(1, num+1):
-        sum += i
-    return sum ** 2
+  '''squrare of sum of 1 to num'''
+  sums = 0
+  for i in range(1, num + 1):
+    sums += i
+  return sums ** 2
 
-def main():
-    print sqr_of_sum(NUM) - sum_of_sqr(NUM)
+def main(num):
+  '''main function'''
+  print sqr_of_sum(num) - sum_of_sqr(num)
 
 if __name__ == '__main__':
-    main()
+  main(INPUT_NUM)

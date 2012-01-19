@@ -16,22 +16,21 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 '''
 
 def is_palindromic(s):
-    '''check whether given str is palindromic'''
-    tmp = list(s)
-    tmp.reverse()
-    revs = "".join(tmp)
-    if s == revs:
-        return True
-    else:
-        return False
+  '''check whether given str is palindromic'''
+  tmp = list(s)
+  tmp.reverse()
+  revs = "".join(tmp)
+  if s == revs:
+    return True
+  else:
+    return False
 
 def main():
-    palindromics = [n for n in [i * j for i in range(100,1000)
-                                      for j in range(i,1000)]
-                               if is_palindromic(str(n))]
-    print max(palindromics)
+  '''main function'''
+  palindromics = [n for n in [i * j for i in range(100, 1000)
+                                    for j in range(i, 1000)]
+                             if is_palindromic(str(n))]
+  print max(palindromics)
 
 if __name__ == '__main__':
-    main()
-
-
+  main()

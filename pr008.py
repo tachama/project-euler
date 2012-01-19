@@ -31,7 +31,8 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 例) 73167 = 7 * 3 * 1 * 6 * 7 = 882
 '''
 
-INPUT= "\
+
+INPUT_STR = "\
 73167176531330624919225119674426574742355349194934\
 96983520312774506326239578318016984801869478851843\
 85861560789112949495459501737958331952853208805511\
@@ -65,13 +66,14 @@ def mult_of_5digit(digits):
   '''mult of 5-digit string'''
   return mult(map(int, list(digits)))
 
-def main():
-  max = 0
-  for idx in range(len(INPUT) - 4):
-    mul = mult_of_5digit(INPUT[idx:idx+5])
-    if mul > max:
-      max = mul
-  print max
+def main(st):
+  '''main function'''
+  max_num = 0
+  for idx in range(len(st) - 4):
+    mul = mult_of_5digit(st[idx:idx+5])
+    if mul > max_num:
+      max_num = mul
+  print max_num
 
 if __name__ == '__main__':
-  main()
+  main(INPUT_STR)
