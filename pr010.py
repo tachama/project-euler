@@ -11,7 +11,10 @@ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
 Find the sum of all the primes below two million.
 '''
 
+INPUT_NUM = 2000000
+
 def eratoshenes(lst):
+  '''eratoshenes algorithm for generate prime'''
   idx = 0
   length = len(lst)
   while idx < length:
@@ -29,8 +32,9 @@ def prime(num):
   lst.insert(0, 2)  # insert '2' to list head
   return lst
 
-def main():
-  print sum(prime(2000000))
+def main(num):
+  '''main function'''
+  print sum(prime(num))
 
 if __name__ == '__main__':
-  main()
+  main(INPUT_NUM)
