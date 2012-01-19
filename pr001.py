@@ -13,17 +13,14 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 
 INPUT_NUM = 1000
 
-
 def mults_3_5(num):
-    '''calculate sum of multiples of 3 or 5 below num'''
-    return [x for x in range(1, num)
-                    if (x % 3 == 0) or (x % 5 == 0)]
-
+  '''calculate sum of multiples of 3 or 5 below num'''
+  return [x for x in range(1, num)
+                  if (x % 3 == 0) or (x % 5 == 0)]
 
 def main(num):
-    '''print sum of multiples of 3 or 5 below num'''
-    print sum(mults_3_5(num))
-
+  '''print sum of multiples of 3 or 5 below num'''
+  print sum(mults_3_5(num))
 
 if __name__ == '__main__':
-    main(INPUT_NUM)
+  main(INPUT_NUM)
