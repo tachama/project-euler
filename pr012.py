@@ -22,30 +22,146 @@ Let us list the factors of the first seven triangle numbers:
 We can see that 28 is the first triangle number to have over five divisors.
 
 What is the value of the first triangle number to have over five hundred divisors?
+
+検討メモ
+
+  triangle numberは、以下の数式で求めることが可能
+    1 + 2 + 3 + ... + n = n * (n+1) / 2
+  よって、上記式"n * (n+1) / 2"に対して検討を行えば良い
+
+  A = N, B = N + 1とした場合に、
+  A、Bをそれぞれ素因数分解しその結果から A*B の約数の数を計算する方法を考える
+
+  例として、A = 14, B = 15 として考える
+  14 = 2 * 7, 15 = 3 * 5となる。
+  これをまとめると、14 * 15 = 2 * 3 * 5 * 7 となる。
+  素数としては、[2,3,5,7]からの組み合わせの総数として考えることが可能。
+    (0,0,0,0) = 1
+    (0,1,0,0) = 3
+    (0,0,1,0) = 5
+    (0,0,0,1) = 7
+    (0,1,1,0) = 15
+    (0,1,0,1) = 21
+    (0,0,1,1) = 35
+    (0,1,1,1) = 105
+    (1,0,0,0) = 2
+    (1,1,0,0) = 6
+    (1,0,1,0) = 10
+    (1,0,0,1) = 14
+    (1,1,1,0) = 30
+    (1,1,0,1) = 42
+    (1,0,1,1) = 70
+    (1,1,1,1) = 210  => 16個の約数
+
+  Aの約数の数をF(A)、Bの約数の数をF(B)とすると、A * Bの約数の数は？
 '''
 
-def triangle():
-  '''generator of triangle number'''
-  num = n = 0
-  while True:
+INPUT_NUM = 500
+
+_primes = [2,3]  # cache prime numbers as list.
+_plen = 2        # length of _primes
+
+
+def prime_next():
+  """add and get next primes of _primes"""
+  global _plen
+  global _primes
+  val = _primes[_plen-1]
+  is_prime = False
+  if val == 3: val -=2  # trick for while-loop...
+  while not is_prime:
+    val += 2  # we treat even number only
+    is_prime = not any(map(lambda x:(val % x) == 0, _primes))
+  _primes.append(val)
+  _plen += 1
+  return val
+
+
+def primes(idx):
+  """get idx's prime number"""
+  if idx < _plen:
+    return _primes[idx]
+  else:
+    return prime_next()
+
+
+def prime_decomp(num):
+  """prime decomposition of num"""
+  decomp = []
+  idx = 0
+  while num != 1:
+    p = primes(idx)
+    while num % p == 0:
+      decomp.append(p)
+      num = num / p
+    idx += 1
+  return decomp
+
+
+def lst_set_add(lst1, lst2):
+  """add two sets, sets is given at list. list must be sorted"""
+  addlst = []
+  idx1 = idx2 = 0
+  len1 = len(lst1)
+  len2 = len(lst2)
+  while idx1 < len1 and idx2 < len2:
+    if lst1[idx1] == lst2[idx2]:
+      addlst.append(lst1[idx1])
+      idx1 += 1
+      idx2 += 1
+    elif lst1[idx1] < lst2[idx2]:
+      addlst.append(lst1[idx1])
+      idx1 += 1
+    else:  # lst1[idx1] > lst2[idx2]
+      addlst.append(lst2[idx2])
+      idx2 += 1
+  # expand unchecked lists
+  if idx1 < len1: addlst.extend(lst1[idx1:])
+  if idx2 < len2: addlst.extend(lst2[idx2:])
+  return addlst
+
+
+def count_lst(lst):
+  """
+  convert lst to count lst
+  eg) [a,a,b] -> [2,1]
+      [1,1,1,3,3,3,3,4,4,5] -> [3,4,2,1]
+  """
+  clst = []
+  while len(lst) > 0:
+    count = lst.count(lst[0])
+    clst.append(count)
+    lst = lst[count:]
+  return clst
+
+
+def calc_combination(lst):
+  """
+  calculate combinations of lst
+  """
+  if len(lst) == 0:
+    return 0
+  else:
+    return reduce(lambda x,y:x*y, map(lambda x: x + 1, lst))
+
+
+def main(num):
+  """main function"""
+  nfactors = 0
+  n = 0
+  while nfactors <= num:
     n += 1
-    num += n
-    yield num
+    lst1 = prime_decomp(n)
+    lst2 = prime_decomp(n + 1)
+    # lst1 is prime-decomp of N, lst2 is prime-decomp of (N+1)
+    # I want to calculate "N * (N + 1) /2", so reduce '2' from lst1 or lst2
+    if lst2[0] == 2: lst2 = lst2[1:]
+    else: lst1 = lst1[1:]
+    nfactors = calc_combination(count_lst(lst_set_add(lst1, lst2))) + 1
+#    # factors contain '1'. but above function except '1'. So add it
+#    nfactors += 1
+  print (n * (n + 1) / 2)
 
-def nfactors(n):
-  '''return number of factor'''
-  num = 0
-  for i in range(1,(n+1)/2):
-    if n % i == 0:
-      num += 1
-  return num+1
-
-def main():
-  '''main function'''
-  for n in triangle():
-    if nfactors(n) >= 500:
-      print n
-      return # exit program
 
 if __name__ == '__main__':
-  main()
+  main(INPUT_NUM)
