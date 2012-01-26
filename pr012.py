@@ -21,7 +21,8 @@ Let us list the factors of the first seven triangle numbers:
 
 We can see that 28 is the first triangle number to have over five divisors.
 
-What is the value of the first triangle number to have over five hundred divisors?
+What is the value of the first triangle number to have over five hundred
+divisors?
 
 検討メモ
 
@@ -68,7 +69,7 @@ def prime_next():
   global _primes
   val = _primes[_plen-1]
   is_prime = False
-  if val == 3: val -=2  # trick for while-loop...
+  if val == 3: val -= 2  # trick for while-loop...
   while not is_prime:
     val += 2  # we treat even number only
     is_prime = not any(map(lambda x:(val % x) == 0, _primes))
@@ -116,8 +117,10 @@ def lst_set_add(lst1, lst2):
       addlst.append(lst2[idx2])
       idx2 += 1
   # expand unchecked lists
-  if idx1 < len1: addlst.extend(lst1[idx1:])
-  if idx2 < len2: addlst.extend(lst2[idx2:])
+  if idx1 < len1:
+    addlst.extend(lst1[idx1:])
+  if idx2 < len2:
+    addlst.extend(lst2[idx2:])
   return addlst
 
 
@@ -142,25 +145,33 @@ def calc_combination(lst):
   if len(lst) == 0:
     return 0
   else:
-    return reduce(lambda x,y:x*y, map(lambda x: x + 1, lst))
+    return reduce(lambda x,y:x*y, map(lambda x:x+1, lst))
 
+
+def remove_a_2(lst1, lst2):
+  """remove a '2' from two lists"""
+  if lst2[0] == 2:
+    return lst1, lst2[1:]
+  else:
+    return lst1[1:], lst2
 
 def main(num):
   """main function"""
   nfactors = 0
-  n = 0
+  n = 1
+  lst1 = None
+  lst2 = prime_decomp(n)
   while nfactors <= num:
     n += 1
-    lst1 = prime_decomp(n)
-    lst2 = prime_decomp(n + 1)
+    lst1 = lst2
+    lst2 = prime_decomp(n)
     # lst1 is prime-decomp of N, lst2 is prime-decomp of (N+1)
     # I want to calculate "N * (N + 1) /2", so reduce '2' from lst1 or lst2
-    if lst2[0] == 2: lst2 = lst2[1:]
-    else: lst1 = lst1[1:]
-    nfactors = calc_combination(count_lst(lst_set_add(lst1, lst2))) + 1
-#    # factors contain '1'. but above function except '1'. So add it
-#    nfactors += 1
-  print (n * (n + 1) / 2)
+    l1, l2 = remove_a_2(lst1, lst2)
+    nfactors = calc_combination(count_lst(lst_set_add(l1, l2)))
+  # here, n has value of largest value.
+  # so triangle number is calclulated by "n * (n-1) / 2"
+  print (n * (n - 1) / 2)
 
 
 if __name__ == '__main__':
