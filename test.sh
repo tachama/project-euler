@@ -76,6 +76,7 @@ main()
         target=`ls *.py | sed -e "s/\.py//"`
     fi
 
+    echo "test problem: $@"
     tests ${target}
 
     print_result
