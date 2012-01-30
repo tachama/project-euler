@@ -24,40 +24,38 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 
 INPUT_NUM = 1000000
 
-def seqlen(num):
-  '''return length of sequence of num'''
-  n = num
-  length = 1
-  while n != 1:
-    length += 1
-    if n % 2 == 0:
-      n = n / 2
-    else:
-      n = 3 * n + 1
-  return length
+def next_val(val):
+  """return sequence next value"""
+  if val % 2 == 0:  # even
+    return val / 2
+  else:  # odd
+    return 3 * val + 1
 
-def seq(num):
-  '''get sequence of number'''
-  n = num
-  lst = [n]
-  while n != 1:
-    if n % 2 == 0:
-      n = n / 2
-    else:
-      n = 3 * n + 1
-    lst.append(n)
-  return lst
+def seqval(seq, length, idx):
+  """return value of seq[idx]"""
+  if idx < length:  # idx is in seq.
+    if not seq[idx]:
+      # if value is not created yet,
+      # put the value in seq.
+      seq[idx] = seqval(seq, length, next_val(idx)) + 1
+    return seq[idx]
+  else:  # idx is out of seq.
+    return seqval(seq, length, next_val(idx)) + 1
+
+def create_seq(maxidx):
+  """create problem sequence"""
+  seq = [None] * maxidx
+  seq[1] = 1
+  for i in range(1, maxidx):
+    if not seq[i]:  # skip if already created.
+      seq[i] = seqval(seq, maxidx, i)
+  return seq
 
 def main(num):
   '''main function'''
-  maxlen = 0
-  maxnum = -1  # initial value
-  for n in range(1, num):
-    l = seqlen(n)
-    if l > maxlen:
-      maxlen = l
-      maxnum = n
-  print maxnum
+  # create None list for seq
+  seq = create_seq(num + 1)
+  print seq.index(max(seq[1:]))
 
 if __name__ == '__main__':
   main(INPUT_NUM)
