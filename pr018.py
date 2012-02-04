@@ -70,11 +70,8 @@ def routes_sub(lst):
 
 
 def routes(depth):
-  """create route patterns of binary tree."""
-  lst = [[0]]
-  for i in range(depth-1):
-    lst = routes_sub(lst)
-  return lst
+  """create route patterns for binary tree."""
+  return reduce(lambda lst, val: routes_sub(lst), range(depth-1), [[0]])
 
 
 def route_value(tree, route):
