@@ -19,7 +19,7 @@ INPUT_NUM = 10000
 
 def divisors(num):
   """return divisors list of num"""
-  return filter(lambda x: num % x == 0, range(1,num))
+  return filter(lambda x: num % x == 0, range(1,num/2+1))
 
 def d(num):
   """problem function"""
