@@ -29,8 +29,8 @@ amicable n = let n2 = d n
              in
                if (n2 /= n) && (n == d n2) then True else False
 
--- solve problem.
+-- sum of all the amicable numbers under n.
 solve :: Int -> Int
-solve n = sum $ filter amicable [1..n]
+solve n = sum $ filter amicable [1..(n-1)]
 
 main = print $ solve input_num
