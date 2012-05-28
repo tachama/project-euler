@@ -33,18 +33,12 @@ def fibonacci(fib=[1,1]):
   return fib
 
 
-def ndigits(num):
-  """
-  number of digits in num
-  """
-  return len(str(num))
-
-
 def main():
   """
   main function
   """
   fib = fibonacci()
+  ndigits = lambda n : len(str(n))  # number of digits
   while ndigits(fib[-1]) < TARGET_NDIGIT:
     fib = fibonacci(fib)
   print len(fib)
