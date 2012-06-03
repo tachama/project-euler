@@ -27,12 +27,12 @@ numMax = 1000
 -- check whether has cycle from divmod list
 hasCycle :: [(Int, Int)] -> (Int, Int) -> Bool
 hasCycle [] _ = False
-hasCycle (t:ts) d = if t == d then True else hasCycle ts d
+hasCycle (t:ts) d = (t == d) || hasCycle ts d
 
 -- convert recurring cycle parts to string.
 cycleParts :: [(Int, Int)] -> (Int, Int) -> String
 cycleParts (t:ts) d = if t == d
-                      then foldr (++) "" $ map (\t -> show $ fst t) (t:ts)
+                      then foldr (++) "" $ map (\x -> show $ fst x) (t:ts)
                       else cycleParts ts d
 
 -- subroutine of recurringCycle
