@@ -17,11 +17,11 @@ import Data.Maybe (catMaybes)
 
 -- prime numbers
 primes :: [Int]
-primes = [x | x <- [2..], all (\n -> x `mod` n /= 0) [2..(x-1)]]
+primes = [x | x <- [2..], isPrime x]
 
 -- check number is prime or not
 isPrime :: Int -> Bool
-isPrime x = all (\n -> x `mod` n /= 0) $ [2..(x-1)]
+isPrime x = all (\n -> x `mod` n /= 0) [2..(x-1)]
 
 
 -- digits of number
@@ -34,7 +34,7 @@ genPrime :: (Int -> [Int]) -> [Int] -> [Int]
 genPrime f ns = filter isPrime $ concatMap f ns
 
 genLPrime = genPrime (\x -> [x * 10 + n | n <- [1..9]])
-genRPrime = genPrime (\x -> [x + n * (10 ^ (ndigits x)) | n <- [1..9]])
+genRPrime = genPrime (\x -> [x + n * (10 ^ ndigits x) | n <- [1..9]])
 
 
 mergeLR :: Int -> Int -> Maybe Int
@@ -48,7 +48,7 @@ mergeLR l r = if coml /= comr
 
 -- generate interesting prime numbers.
 genInteresting :: [Int] -> [Int] -> [Int]
-genInteresting lpr rpr = gens ++ (genInteresting nextLpr nextRpr)
+genInteresting lpr rpr = gens ++ genInteresting nextLpr nextRpr
                          where
                            lst = [mergeLR l r | l <- lpr, r <- rpr]
                            gens = sort $ filter isPrime $ catMaybes lst
@@ -56,7 +56,7 @@ genInteresting lpr rpr = gens ++ (genInteresting nextLpr nextRpr)
                            nextRpr = genRPrime rpr
 
 -- main function.
-main = print $ sum $ take 11 $ interestings
+main = print $ sum $ take 11 interestings
        where
          oneDigitPrimes = takeWhile (<10) primes
          interestings = genInteresting oneDigitPrimes oneDigitPrimes

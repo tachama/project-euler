@@ -19,28 +19,22 @@ concatenated product of an integer with (1,2, ... , n) where n > 1?
 module Main where
 
 import Data.List (sort)
-import Data.Maybe (catMaybes)
+import Data.Maybe (mapMaybe)
 
 -- create pandigital number from x
 generate :: Int -> Int -> Maybe Int
-generate x n = if genlen == 9
-               then if isp
-                    then Just gennum
-                    else Nothing
-               else
-                   if genlen < 9
-                   then generate x (n+1)
-                   else Nothing
-               where
-                 tmp = foldr1 (++) $ map (show . (*x)) [1..n]
-                 genlen = length tmp
-                 gennum = read tmp
-                 isp = sort tmp == "123456789"
-
+generate x n | genlen == 9 = if isp then Just gennum else Nothing
+             | genlen < 9  = generate x (n+1)
+             | otherwise   = Nothing
+             where
+               tmp = foldr1 (++) $ map (show . (*x)) [1..n]
+               genlen = length tmp
+               gennum = read tmp
+               isp = sort tmp == "123456789"
 
 -- return maximun pandigital number.
 maxPandigital :: Int
-maxPandigital = maximum $ catMaybes $ map createPandigital [1..9999]
+maxPandigital = maximum $ mapMaybe createPandigital [1..9999]
                 where
                   createPandigital = flip generate 2
 
