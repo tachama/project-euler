@@ -12,12 +12,30 @@ NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 module Main where
 
+import Data.List (elem)
+
 -- prime numbers
 primes :: [Int]
 primes = [x | x <- [2..], all (\n -> x `mod` n /= 0) [2..(x-1)]]
 
--- check number is prome or not.
-is_prime 
+-- check number is prime or not
+isPrime :: Int -> Bool
+isPrime x = elem x $ takeWhile (<=x) primes
+
+-- check number has interesting property
+isInteresting :: Int -> Bool
+isInteresting x = if x < 10
+                  then isPrime x
+                  else
+                      and [isPrime x, isInteresting (rtrunc x), isInteresting (ltrunc x)]
+                      where
+                        rtrunc x = x `div` 10
+                        ltrunc x = x `mod` (10 ^ (length (show x) - 1))
 
 
-main = print $ take 10 primes
+-- list of numbers that has interesting property.
+interesting :: [Int]
+interesting = filter isInteresting $ dropWhile (<10) primes
+
+-- main function
+main = print $ sum $ take 11 interesting
