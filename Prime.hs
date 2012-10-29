@@ -2,15 +2,24 @@
 Prime module : My original PRIME functions.
 -}
 
-module Prime (primesUnder) where
+module Prime (primesUnder, primesArrUnder) where
 
 import Control.Monad
 import Control.Monad.ST
+import Data.Array
 import Data.Array.ST
 
 -- prime number list under n.
 primesUnder :: Int -> [Int]
 primesUnder n = runST $ eratoshnes n
+
+-- primes number array under n
+--   return pair as (length, array), index of array is "0,1,2..."
+primesArrUnder :: Int -> (Int, Array Int Int)
+primesArrUnder n = (len, listArray (0, len - 1) prs)
+                   where
+                     prs = primesUnder n
+                     len = length prs
 
 -- eratoshnes sieve algorithm.
 eratoshnes n = do
