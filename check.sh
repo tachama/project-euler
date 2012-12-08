@@ -10,7 +10,7 @@
 
 # 対応しているプログラムのサフィックスリスト
 # (python->py, haskell->hs, commonlisp->lisp)
-#suffixes="py hs lisp"
+#suffixes="py hs lisp c"
 suffixes="py hs"  # XXX: common-lispは今は除外する
 
 # 問題番号のプログラムが存在するかを確認する
@@ -30,6 +30,7 @@ check_program() {
                 "py" ) lang="Python" ;;
                 "hs" ) lang="Haskell" ;;
                 "lisp" ) lang="CommonLisp" ;;
+                "c"  ) lang="C" ;;
                 * ) lang="UNKNOWN" ;;
             esac
             echo "Problem $1: ${lang} version is not exist!; ${token}.${suffix}"
