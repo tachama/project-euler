@@ -66,7 +66,7 @@ in2lstsub n ss = (take n ss) : (in2lstsub (n+1) (drop n ss))
 --   (entry is "routes [[0]] DEPTH")
 routes :: [[Int]] -> Int -> [[Int]]
 routes lst 0 = lst
-routes lst (n+1) = routes (routesub lst) n
+routes lst n = routes (routesub lst) (n-1)
 
 routesub :: [[Int]] -> [[Int]]
 routesub lst = foldr (++) [] (map routesub2 lst)
@@ -87,6 +87,7 @@ solve :: [[Int]] -> [[Int]] -> Int
 solve inlst pattern = maximum $ map (routeval inlst) pattern
 
 -- main routine
+main :: IO ()
 main = let inlst = in2lst instr
            patts = routes [[0]] (length inlst - 1)
        in

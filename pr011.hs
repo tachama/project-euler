@@ -32,7 +32,7 @@ What is the greatest product of four adjacent numbers in any direction
 
 module Main where
 
-import Maybe
+import Data.Maybe
 
 input_str :: String
 input_str = "\
@@ -110,4 +110,5 @@ solve :: String -> Int
 solve ss = maximum $ (++) (left4digits inlst) (down4digits inlst)
              where inlst = in2lst ss
 
+main :: IO ()
 main = print $ solve input_str

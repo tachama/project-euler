@@ -13,10 +13,11 @@ What is the total of all the name scores in the file?
 
 module Main where
 
-import Char (ord)
-import List (sort)
+import Data.Char (ord)
+import Data.List (sort)
 
 -- problem input file name.
+infile :: String
 infile = "pr022_names.txt"
 
 -- split string with a character
@@ -49,6 +50,7 @@ solve ss = let names = map strpickup $ split ',' ss
            in
              sum $ map namescore $ zip [1..] (sort names)
 
+main :: IO ()
 main = do cs <- readFile infile  -- read data from infile
           print $ solve cs
 

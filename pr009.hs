@@ -24,4 +24,5 @@ pythagorean (a,b,c) = (a > 0) && (b > a) && (c > b) &&
 mult_of_3tuple :: (Int, Int, Int) -> Int
 mult_of_3tuple (a, b, c) = a * b * c
 
+main :: IO ()
 main = print $ head $ map mult_of_3tuple (filter pythagorean inlst)

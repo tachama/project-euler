@@ -39,6 +39,7 @@ uniq :: (Eq a) => [a] -> [a]
 uniq (n:[]) = [n]
 uniq (n1:n2:ns) | n1 == n2 = uniq (n1:ns)
                 | otherwise = n1 : uniq (n2:ns)
+uniq _ = error "invalid arg"
 
 -- non-abundant number list equal or under n
 nonAbundant :: Int -> [Int]
@@ -55,4 +56,5 @@ listSub (x:xs) (y:ys) | x == y = listSub xs ys
                       | x > y = listSub (x:xs) ys
                       | x < y = x : listSub xs (y:ys)
 
+main :: IO ()
 main = print $ sum $ listSub [1..limitNum] $ nonAbundant limitNum

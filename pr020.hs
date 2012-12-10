@@ -9,14 +9,15 @@ Find the sum of the digits in the number 100!
 
 module Main where
 
-import List (unfoldr)
+import Data.List (unfoldr)
 
+input_num :: Integer
 input_num = 100  -- problem input number.
 
 -- factorial of number
 factorial :: Integer -> Integer
 factorial 1 = 1
-factorial (n+1) = (n+1) * factorial n
+factorial n = n * factorial (n-1)
 
 -- sum of digits
 digit_sum :: Integer -> Integer
@@ -31,4 +32,5 @@ divide n = Just (n `mod` 10, n `div` 10)
 solve :: Integer -> Integer
 solve n = digit_sum $ factorial n
 
+main :: IO ()
 main = print $ solve input_num

@@ -13,4 +13,5 @@ input_number :: Int
 input_number = 2000000  -- two million
 
 -- main function
+main :: IO ()
 main = print $ sum $ primesUnder input_number

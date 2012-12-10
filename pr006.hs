@@ -17,4 +17,5 @@ module Main where
 sqr :: Int -> Int
 sqr n = n * n
 
+main :: IO ()
 main = print ((sqr $ sum [1..100]) - sum [sqr x | x <- [1..100]])

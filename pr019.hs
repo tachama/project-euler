@@ -31,7 +31,9 @@ isLeap :: Int -> Bool
 isLeap n = (n `mod` 4 == 0) && ((n `mod` 100 /= 0) || (n `mod` 400 == 0))
 
 -- day calculators
+daysLst :: [Int]
 daysLst = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  -- non-leap
+daysLstL :: [Int]
 daysLstL = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]  -- leap
 
 isSunday :: Day -> Bool
@@ -39,7 +41,7 @@ isSunday d = d == SUNDAY
 
 stepDay :: Int -> Day -> Day
 stepDay 0 d = d
-stepDay (n+1) d = stepDay (n `mod` 7) (nextDay d)
+stepDay n d = stepDay ((n-1) `mod` 7) (nextDay d)
 
 nextDay :: Day -> Day
 nextDay d = case d of
@@ -77,4 +79,5 @@ solve start end = let lst = foldl f [yearDays baseYear MONDAY] [(baseYear+1) .. 
                     sum $ map (length . (filter isSunday)) lst3
 
 -- main function.
+main :: IO ()
 main = print $ solve 1901 2000

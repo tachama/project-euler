@@ -64,4 +64,5 @@ letter n = (letter_sub1 d1 "thousand")
 solve :: Int -> Int
 solve n = sum $ map (length . letter) [1..n]
 
+main :: IO ()
 main = print $ solve input_num

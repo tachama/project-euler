@@ -23,10 +23,11 @@ mult2 (n:ns) over = m:mult2 ns d
 -- subroutine of bvalue
 bvalue_sub :: Int -> [Int] -> [Int]
 bvalue_sub 0 ns = ns
-bvalue_sub (n+1) ns = bvalue_sub n (mult2 ns 0)
+bvalue_sub n ns = bvalue_sub (n-1) (mult2 ns 0)
 
 -- return 2 ** n as digit list
 bvalue :: Int -> [Int]
 bvalue n = bvalue_sub n [1]
 
+main :: IO ()
 main = print $ sum $ bvalue input_num

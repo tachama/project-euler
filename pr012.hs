@@ -79,4 +79,5 @@ nfactors n = calc_combination $ sets2nums $ prime_decomp n
 solve :: Int -> Int
 solve n = head $ dropWhile (\x -> nfactors x < n) triangle_nums
 
+main :: IO ()
 main = print $ solve input_num

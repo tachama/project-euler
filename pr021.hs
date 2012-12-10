@@ -13,6 +13,7 @@ Evaluate the sum of all the amicable numbers under 10000.
 
 module Main where
 
+input_num :: Int
 input_num = 10000
 
 -- divisors list of n
@@ -33,4 +34,5 @@ amicable n = let n2 = d n
 solve :: Int -> Int
 solve n = sum $ filter amicable [1..(n-1)]
 
+main :: IO ()
 main = print $ solve input_num

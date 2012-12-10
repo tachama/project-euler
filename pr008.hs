@@ -26,7 +26,7 @@ Find the greatest product of five consecutive digits in the 1000-digit number.
 
 module Main where
 
-import Char
+import Data.Char
 
 instr :: String
 instr = "\
@@ -69,4 +69,5 @@ divide5in ss = if length ss > 5
 mulof5digit :: String -> Int
 mulof5digit ss = multiple (map atoi ss)
 
+main :: IO ()
 main = print $ maximum $ map mulof5digit (divide5in instr)

@@ -8,7 +8,7 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 
 module Main where
 
-import Char
+import Data.Char
 
 -- subroutine of int2str
 int2rts :: Int -> String
@@ -27,4 +27,5 @@ palindromic n = if str == (reverse str)
                    else False
                  where str = int2str n
 
+main :: IO ()
 main = print $ maximum [x * y | x <- [100..999], y <- [x..999], palindromic (x * y)]

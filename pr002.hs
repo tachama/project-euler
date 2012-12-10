@@ -15,9 +15,11 @@ module Main where
 fib :: Int -> [Int] -> [Int]
 fib n (f2:f1:fs) | f2+f1 >= n = f2:f1:fs
                  | otherwise  = fib n ((f2+f1):f2:f1:fs)
+fib _ _ = error "invalid args"
 
 {- return fibonacci secuence under the value -}
 fibonacci :: Int -> [Int]
 fibonacci n = reverse (fib n [2, 1])
 
+main :: IO ()
 main = print (sum (filter even (fibonacci 4000000)))

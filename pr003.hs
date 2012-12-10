@@ -25,4 +25,6 @@ pf n fs n2 | n `mod` n2 == 0 = pf (n `div` n2) (n2:fs) n2
 prime_factors :: Int -> [Int]
 prime_factors n = pf n [] (next_prime 1)
 
+main :: IO ()
 main = print $ maximum $ prime_factors 600851475143
+

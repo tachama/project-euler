@@ -17,4 +17,5 @@ input_height = 20
 combination :: Integer -> Integer -> Integer
 combination m n = (product [(m-n+1)..m]) `div` (product [1..n])
 
+main :: IO ()
 main = print $ combination (input_width + input_height) input_width

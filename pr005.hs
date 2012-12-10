@@ -18,4 +18,5 @@ rest n (f:fs) = if n `mod` f == 0
 rests :: Int -> Int
 rests n = rest n [rests x | x <- [1..(n-1)]]
 
+main :: IO ()
 main = print (foldr (*) 1 [rests n | n <- [1..20]])

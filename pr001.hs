@@ -12,5 +12,6 @@ module Main where
 mults_3_5 :: Int -> [Int]
 mults_3_5 n = [x | x <- [1..(n-1)], (x `mod` 3 == 0) || (x `mod` 5 == 0)]
 
+main :: IO ()
 main = print $ sum $ mults_3_5 1000
 

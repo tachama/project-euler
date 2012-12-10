@@ -216,4 +216,5 @@ instr2lst ss = map read (words ss)
 str2int :: String -> Int
 str2int = read
 
+main :: IO ()
 main = print $ str2int $ take 10 (show $ sum $ instr2lst instr)

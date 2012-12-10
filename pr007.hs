@@ -14,4 +14,5 @@ has_factor x ns = or $ map (\n -> x `mod` n == 0) ns
 prime :: [Int]
 prime = [x | x <- [2..], not (has_factor x [2..(x-1)])]
 
+main :: IO ()
 main = print (head (drop 10000 prime))
