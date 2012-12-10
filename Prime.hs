@@ -2,12 +2,16 @@
 Prime module : My original PRIME functions.
 -}
 
-module Prime (primesUnder, primesArrUnder) where
+module Prime (primes, primesUnder, primesArrUnder) where
 
 import Control.Monad
 import Control.Monad.ST
 import Data.Array
 import Data.Array.ST
+
+-- infiniti list of primes
+primes :: (Integral a) => [a]
+primes = [n | n <- [2..], all (\x -> n `mod` x /= 0) [2..(n-1)]]
 
 -- prime number list under n.
 primesUnder :: Int -> [Int]
