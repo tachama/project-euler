@@ -6,7 +6,7 @@
 clean:
 	@echo "remove non-source files"
 	rm -f *.pyc
-	rm -f a.out *.hi *.o
+	rm -f a.out *.hi *.o core
 
 # add exec-permission for script files.
 exec:
