@@ -1,6 +1,6 @@
 # Makefile : workspace setup.
 
-.PHONY: clean exec
+.PHONY: clean exec sync
 
 # clean non-source files (*.pyc etc)
 clean:
@@ -12,3 +12,8 @@ clean:
 exec:
 	@echo "add exec-permission to scripts"
 	chmod +x *.py
+
+# sync with github
+sync:
+	@echo "sync with github"
+	git push -u origin master
