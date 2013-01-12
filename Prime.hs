@@ -11,7 +11,7 @@ import Data.Array.ST
 
 -- infiniti list of primes
 primes :: (Integral a) => [a]
-primes = [n | n <- [2..], all (\x -> n `mod` x /= 0) [2..(n-1)]]
+primes = 2:[n | n <- [3,5..], all (\x -> n `mod` x /= 0) [3,5..(n-1)]]
 
 -- prime number list under n.
 primesUnder :: Int -> [Int]
