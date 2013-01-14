@@ -73,7 +73,7 @@ def main(num):
   fracs = [fraction(i) for i in nums]
   pairs = zip(nums, fracs)
   pairs.sort(compare_tuple)
-  print pairs[0][0]  # print second element of list head.
+  print pairs[0][0]  # print first element of list head.
 
 
 if __name__ == "__main__":
