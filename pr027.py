@@ -71,9 +71,7 @@ def main(n):
   """main function"""
   combs = [(a,b) for a in range(-n + 1, n) for b in range(-n + 1, n)]
   pairs = zip(combs, map(prime_count, combs))
-  #ab, _ = max(pairs, key=lambda t: t[1])
-  ab, length = max(pairs, key=lambda t: t[1])
-  print ab, length
+  ab, _ = max(pairs, key=lambda t: t[1])
   print ab[0] * ab[1]
 
 
