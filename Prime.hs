@@ -2,12 +2,18 @@
 Prime module : My original PRIME functions.
 -}
 
-module Prime (primes, primesUnder, primesArrUnder) where
+module Prime (isPrime, primes, primesUnder, primesArrUnder) where
 
 import Control.Monad
 import Control.Monad.ST
 import Data.Array
 import Data.Array.ST
+
+-- check num is prime
+isPrime :: Int -> Bool
+isPrime 1 = False
+isPrime 2 = True
+isPrime n = all (\x -> n `mod` x /= 0) $ 2:[3,5..(n-1)]
 
 -- infiniti list of primes
 primes :: (Integral a) => [a]
