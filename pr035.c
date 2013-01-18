@@ -16,7 +16,7 @@
 #define TARGET_MAX	1000000
 
 static int rotation(int);
-static int search(int, int *, int, int);
+static int search(int, int *, int);
 
 int
 main(int argc, char *argv[])
@@ -36,7 +36,7 @@ main(int argc, char *argv[])
 		is_cp = 1;
 		num = rotation(prs[i]);
 		while (num != prs[i]) {
-			if (search(num, prs, 0, pr_len - 1) < 0) {
+			if (search(num, prs, pr_len) < 0) {
 				/* rotation numbe is not prime */
 				is_cp = 0;
 				break;
@@ -78,19 +78,22 @@ rotation(int num)
  * return netative if not found.
  */
 static int
-search(int n, int *ns, int i1, int i2)
+search(int n, int *ns, int len)
 {
-	int i;
-	if (i1 > i2)
-		/* not found */
-		return -1;
-	i = (i1+i2)/2;
-	if (n > ns[i])
-		return search(n, ns, i+1, i2);
-	else if (n < ns[i])
-		return search(n, ns, i1, i2-1);
-	else
-		/* n == ns[i]; found value */
-		return i;
+	int i, i1, i2;
+	i1 = 0;
+	i2 = len - 1;
+	while (i1 <= i2) {
+		i = (i1+i2)/2;
+		if (ns[i] == n)
+			/* found num at index i */
+			return i;
+		if (n > ns[i])
+			i1 = i + 1;
+		else
+			i2 = i - 1;
+	}
+	/* not found num in ns */
+	return -1;
 }
 
