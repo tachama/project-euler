@@ -48,6 +48,7 @@ main(int argc, char *argv[])
 		if (n_found == NEED_NFOUND)
 			break;  /* out to while-loop */
 		tmp = pr_len;  /* skip already checked for next loop */
+		free(pr_arr);
 	}
 	printf("%ld\n", sum);
 	return 0;
