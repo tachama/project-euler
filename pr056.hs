@@ -19,6 +19,7 @@ power :: (Integral a) => a -> a -> a
 power a 0 = a
 power a b = a * power a (b-1)
 
+main :: IO ()
 main = print $ maximum $ map (digitSum . (uncurry power)) nums
        where
          nums = (,) <$> [1..99] <*> [1..99]
