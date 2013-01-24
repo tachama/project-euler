@@ -11,7 +11,7 @@
 # 対応しているプログラムのサフィックスリスト
 # (python->py, haskell->hs, commonlisp->lisp)
 #suffixes="py hs lisp c"
-suffixes="py hs"  # XXX: common-lispは今は除外する
+suffixes="py hs c"  # XXX: common-lispは今は除外する
 
 # 問題番号のプログラムが存在するかを確認する
 exist_program() {
